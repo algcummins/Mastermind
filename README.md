@@ -1,2 +1,1 @@
-# Mastermind
-Assignment 2 - AE1205
+# For AE1205
