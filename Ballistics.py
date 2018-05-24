@@ -8,19 +8,9 @@ from numpy import array
 from math import pi, sin, cos, atan2
 from mathtools import rad, deg, norm 
 
-ct = {'g': 9.80665, 'rho_air': 1.225, 'rho_stone': 1600, 'cd': 0.7}
-
-#==============================================================================
-# S = pi*0.2376**2
-# L0 = 0.5 
-# m = 90.
-# phi = 0
-# phistop = rad(60)
-# Ke = 5000
-# R = 3.
-#==============================================================================
-
-def catapult(R, phi, phistop, L0, Ke, m, S): 
+def catapult(R, phi, phistop, L0, Ke, m, S):
+    
+    ct = {'g': 9.80665, 'rho_air': 1.225, 'rho_stone': 1600, 'cd': 0.7}
     
     beta = rad((90-phi)/2)
     phidotdot = 0.
@@ -39,22 +29,17 @@ def catapult(R, phi, phistop, L0, Ke, m, S):
     while phi < phistop and t < 100:
         t = t + dt
         
-        
         beta = (pi/2 - phi)/2
-         
         
         Le = 2*R*sin(beta)
-        
         Fe = Ke*(Le - L0)
         
-        phidotdot = Fe/(R*m)*cos(beta) - ct['g']*cos(phi)/R
-            
+        phidotdot = Fe/(R*m)*cos(beta) - ct['g']*cos(phi)/R 
         phidot = phidot + phidotdot*dt 
-        
         phi = phi + phidot*dt
         
         V = R*phidot
-        
+       
         ttab.append(t)
         Vtab.append(V)
     
@@ -79,9 +64,7 @@ def catapult(R, phi, phistop, L0, Ke, m, S):
     Vxtab = [Vx]
     Vytab = [Vy]
     Vtab  = [V]
-#    theta = atan2(Vy, Vx)
-#    print("Launch angle =", round(deg(theta),1), "degrees\n") 
-    
+
     while y > 0 and t < 100:
         t = t + dt 
         
